@@ -24,6 +24,10 @@ import {
   GlobeIcon,
 } from "@phosphor-icons/react";
 import { bridgeContext } from "~/context";
+import { type MiddlewareFunction } from "react-router";
+import { bridgeMiddleware } from "~/bridgeMiddleware";
+
+export const middleware: MiddlewareFunction[] = [bridgeMiddleware];
 
 // Language options with flag emojis and proper language codes
 const LANGUAGES = [
@@ -69,11 +73,6 @@ export const action = async ({
   if (!language || typeof language !== "string") {
     return { error: "Language is required" };
   }
-
-  //   if (!agentId || typeof agentId !== "string") {
-  //     return { error: "Agent ID is required" };
-  //   }
-
   try {
     const translation = await bridge.llm.generateText({
       prompt: `Translate the following text to ${language}: ${text}`,
