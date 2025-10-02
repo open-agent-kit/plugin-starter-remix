@@ -10,7 +10,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@open-agent-kit/bridge": "^0.0.2",
+    "@open-agent-kit/bridge": "^0.0.4",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-label": "^2.1.7",
