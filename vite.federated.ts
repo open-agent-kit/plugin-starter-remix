@@ -18,7 +18,7 @@ export default defineConfig({
   ],
   build: {
     target: "chrome89",
-    outDir: "public/assets",
+    outDir: "public",
     rollupOptions: {
       external: ["react", "react-dom"],
       input: {},
