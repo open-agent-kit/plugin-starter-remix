@@ -5,12 +5,12 @@
   "scripts": {
     "build": "react-router build && npm run build:federated",
     "build:federated": "vite build --config vite.federated.ts",
-    "dev": "react-router dev --port 8001",
-    "start": "react-router-serve ./build/server/index.js",
+    "dev": "react-router dev --port 8080",
+    "start": "PORT=8080 react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@open-agent-kit/bridge": "^0.0.4",
+    "@open-agent-kit/bridge": "^0.0.6",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-label": "^2.1.7",
