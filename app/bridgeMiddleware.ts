@@ -7,6 +7,8 @@ export const bridgeMiddleware: MiddlewareFunction = async (
   next
 ) => {
   const token = request.headers.get("oak_session_token");
+  const serverUrl = request.headers.get("oak_server_url");
+
   if (!token) {
     throw new Error(
       "No token provided. Plugins need to be proxied through the OAK server to receive a token."
@@ -14,7 +16,8 @@ export const bridgeMiddleware: MiddlewareFunction = async (
   }
   const bridge = createBridge({
     token: token,
-    serverUrl: process.env.OAK_SERVER_URL || "https://oak.localhost",
+    serverUrl:
+      serverUrl || process.env.OAK_SERVER_URL || "https://oak.localhost",
   });
   context.set(bridgeContext, bridge);
   return next();
