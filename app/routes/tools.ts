@@ -3,7 +3,8 @@ import toolDefinition from "~/tools.definition";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const requestBody = await request.json();
-  return toolDefinition.handleToolExecution(requestBody as any);
+  const headers = Object.fromEntries(request.headers.entries());
+  return toolDefinition.handleToolExecution(requestBody as any, headers);
 };
 
 export const loader = async () => {
