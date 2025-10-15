@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs } from "react-router";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const documentId = params.documentId as string;
+  const agentId = params.agentId as string;
   if (!documentId) {
     return new Response("Document ID is required", { status: 400 });
   }

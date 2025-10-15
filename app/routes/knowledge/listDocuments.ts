@@ -1,4 +1,7 @@
-export const loader = async () => {
+import type { LoaderFunctionArgs } from "react-router";
+
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const agentId = params.agentId as string;
   return {
     documents: [
       {

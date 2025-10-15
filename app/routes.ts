@@ -13,7 +13,7 @@ export default [
     "routes/knowledge/listDocuments.ts"
   ),
   route(
-    "/knowledge/getDocument/:documentId",
+    "/knowledge/getDocument/:agentId/:documentId",
     "routes/knowledge/getDocument.ts"
   ),
 ] satisfies RouteConfig;
