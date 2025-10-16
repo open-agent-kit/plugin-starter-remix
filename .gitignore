@@ -5,3 +5,4 @@
 /.react-router/
 /build/
 /public/assets/
+/public/remoteEntry.js
