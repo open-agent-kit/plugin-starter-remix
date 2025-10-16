@@ -1,4 +1,4 @@
-import { Tools } from "@open-agent-kit/bridge";
+import { Tools, type ToolExecuteParams } from "@open-agent-kit/bridge";
 import z from "zod";
 
 const toolDefinition = new Tools();
@@ -18,10 +18,13 @@ toolDefinition.registerTool({
   name: "Translate",
   description: "Translate the given text to the target language",
   params: translateSchema,
-  federatedToolComponentName: "./translatorTool",
-  execute: async (params: z.infer<typeof translateSchema>) => {
-    const { text, targetLanguage } = params;
-    return { result: `Translated text: ${text} to ${targetLanguage}` };
+  // the name must match the name from vite.federated.ts
+  federatedToolComponentName: "translatorTool",
+  execute: async (params: ToolExecuteParams<TranslateParams>) => {
+    const { text, targetLanguage } = params.input;
+    return {
+      result: `Translated text: ${text} to ${targetLanguage}` as unknown,
+    };
   },
 });
 
