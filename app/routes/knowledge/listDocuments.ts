@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs } from "react-router";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const agentId = params.agentId as string;
+  // TODO: Implement
   return {
     documents: [
       {

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [tailwindcss(), tsconfigPaths(), reactRouter()],
   server: {
     hmr: {
-      clientPort: 8001,
+      clientPort: 8000,
       host: "localhost",
       protocol: "ws",
     },

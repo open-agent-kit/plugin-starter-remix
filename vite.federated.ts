@@ -13,7 +13,7 @@ export default defineConfig({
       // the name must remain unchanged and always needs to be "remoteOAKPlugin"
       name: "remoteOAKPlugin",
       exposes: {
-        "./translatorTool": "./app/components/tools/translatorTool.tsx",
+        // "./myComponent": "./app/components/tools/myComponent.tsx",
       },
       shared: ["react", "react-dom"],
     }),
@@ -22,7 +22,6 @@ export default defineConfig({
     target: "chrome89",
     outDir: "public",
     rollupOptions: {
-      external: ["react", "react-dom"],
       input: {},
     },
   },

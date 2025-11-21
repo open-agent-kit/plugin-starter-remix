@@ -6,7 +6,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   if (!documentId) {
     return new Response("Document ID is required", { status: 400 });
   }
-  // TODO: retrieve the document
+  // TODO: Implement
   return {
     document: {
       id: documentId,
