@@ -6,6 +6,7 @@ import {
   useActionData,
   useNavigation,
   type ActionFunctionArgs,
+  type LoaderFunctionArgs,
 } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
@@ -97,7 +98,7 @@ export const action = async ({
   }
 };
 
-export const loader = async ({ params }) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const agentId = params.agentId as string;
   return {
     agentId,
