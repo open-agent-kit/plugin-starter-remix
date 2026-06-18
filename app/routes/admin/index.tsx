@@ -4,5 +4,5 @@ import { bridgeMiddleware } from "~/bridgeMiddleware";
 export const middleware: MiddlewareFunction[] = [bridgeMiddleware];
 
 export default function Admin() {
-  return <div>Admin Page for Translator Tool</div>;
+  return <div>Admin Page</div>;
 }

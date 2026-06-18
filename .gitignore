@@ -6,3 +6,6 @@
 /build/
 /public/assets/
 /public/remoteEntry.js
+
+# Module federation build artifacts
+/.__mf__temp/

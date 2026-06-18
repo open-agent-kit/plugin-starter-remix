@@ -10,7 +10,8 @@ export default defineConfig({
     tsconfigPaths(),
     federation({
       filename: "remoteEntry.js",
-      // the name must remain unchanged and always needs to be "remoteOAKPlugin"
+      // legacy identifier — must remain "remoteOAKPlugin" (the SAALT shell looks
+      // up federated remotes by this exact name; renaming breaks discovery)
       name: "remoteOAKPlugin",
       exposes: {
         // "./myComponent": "./app/components/tools/myComponent.tsx",

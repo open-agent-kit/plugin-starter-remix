@@ -1,10 +1,12 @@
-# OAK Plugin v2 Starter
+# SAALT Plugin v2 Starter
 
-A microservice plugin template for the Open Agent Kit (OAK) ecosystem. This plugin communicates with the OAK core system and provides a foundation for building custom tools and interfaces.
+A microservice plugin template for the SAALT ecosystem (formerly Open Agent Kit / OAK). This plugin communicates with the SAALT core system and provides a foundation for building custom tools and interfaces.
+
+The npm package, HTTP header, and identifier names below still use the legacy `oak` / `OAK` / `@open-agent-kit/` prefixes — these are stable code identifiers and must not be renamed. The product itself is SAALT.
 
 ## Architecture Overview
 
-This plugin is built using React Router v7 and serves as a federated microservice that integrates with the OAK core. It exposes both API endpoints and federated UI components that can be consumed by the main OAK application.
+This plugin is built using React Router v7 and serves as a federated microservice that integrates with the SAALT core. It exposes both API endpoints and federated UI components that can be consumed by the main SAALT application.
 
 ## Project Structure
 
@@ -20,15 +22,15 @@ app/
 │   ├── tools/                # Federated tool components
 │   └── ui/                   # Reusable UI components
 ├── tools.definition.ts       # Tool definitions and schemas
-├── context.ts               # Bridge context for OAK integration
-└── bridgeMiddleware.ts      # Middleware for OAK communication
+├── context.ts               # Bridge context for SAALT integration
+└── bridgeMiddleware.ts      # Middleware for SAALT communication
 ```
 
 ## Exposed Routes
 
 ### Required Routes
 
-These routes are mandatory for OAK integration:
+These routes are mandatory for SAALT integration:
 
 #### `GET /tools`
 
@@ -211,7 +213,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
 ### Middleware Setup
 
-Use the bridge middleware for OAK integration:
+Use the bridge middleware for SAALT integration:
 
 ```typescript
 import type { MiddlewareFunction } from "react-router";
@@ -222,14 +224,14 @@ export const middleware: MiddlewareFunction[] = [bridgeMiddleware];
 
 ### Context Usage
 
-Access OAK bridge context in components:
+Access the SAALT bridge context in components:
 
 ```typescript
 import { bridgeContext } from "~/context";
 
 // In your component
 const bridge = bridgeContext.use();
-// Use bridge methods for OAK communication
+// Use bridge methods for SAALT communication
 ```
 
 ## Development
@@ -272,22 +274,40 @@ The plugin can be deployed as a standalone microservice. The build output includ
 
 ## Key Dependencies
 
-- `@open-agent-kit/bridge` - OAK integration bridge
+- `@open-agent-kit/bridge` - SAALT integration bridge (legacy package scope)
+- [`@saalt/saalt-ui`](https://www.npmjs.com/package/@saalt/saalt-ui) - Shared SAALT UI primitives (Button, Card, Input, Label, Select, Tabs, Textarea, Dialog, DropdownMenu, Tooltip, Command, …)
 - `react-router` - Routing and server-side rendering
 - `zod` - Schema validation for tool parameters
-- `@originjs/vite-plugin-federation` - Module federation for UI components
+- `@module-federation/vite` - Module federation for UI components
+
+## UI components: prefer `@saalt/saalt-ui`
+
+For all plugin UI work, import from [`@saalt/saalt-ui`](https://www.npmjs.com/package/@saalt/saalt-ui) first. It ships the shared SAALT visual style so every plugin looks the same in the SAALT shell without per-plugin theming.
+
+```tsx
+import { Button, Card, Input, Label, Select, Tabs, Textarea } from "@saalt/saalt-ui";
+import "@saalt/saalt-ui/saalt-ui.css"; // import once, at the top of app/app.css
+```
+
+This starter still ships local copies of the primitives under `app/components/ui/` so the bundled translator demo is fully self-contained — when you build a real plugin, prefer the `@saalt/saalt-ui` imports and only fall back to local primitives when:
+
+1. The component you need is missing from `@saalt/saalt-ui`.
+2. There is a hard compatibility conflict with your plugin.
+3. A critical behaviour mismatch cannot be solved with composition.
+
+Document the reason whenever you fall back.
 
 ## Best Practices
 
 1. **Tool Definitions**: Always use Zod schemas for parameter validation
 2. **Error Handling**: Implement proper error handling in tool execution
 3. **Type Safety**: Export TypeScript types for tool parameters and results
-4. **UI Components**: Keep federated components lightweight and self-contained
-5. **Bridge Integration**: Use the provided middleware for all routes that need OAK integration
+4. **UI Components**: Prefer `@saalt/saalt-ui` primitives over local ones; keep federated tool components lightweight and self-contained
+5. **Bridge Integration**: Use the provided middleware for all routes that need SAALT integration
 
 ## Troubleshooting
 
 - Ensure all required routes (`/tools`, `/meta`) are implemented
 - Check that tool identifiers are unique across your plugin
 - Verify federated component exports match the `federatedToolComponentName`
-- Use the bridge context for proper OAK communication
+- Use the bridge context for proper SAALT communication
