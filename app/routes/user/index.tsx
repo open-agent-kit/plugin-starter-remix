@@ -82,6 +82,10 @@ export const action = async ({
       options: {
         disableTools: true,
       },
+      // llm.* is the exception to the bind-once scope: it still takes `agentId`
+      // per call. Agent-bound → pass the route's agentId (Core returns 400
+      // "agentId is required" otherwise). A standalone app omits it, and Core
+      // uses the instance-wide default model.
       agentId,
     });
     return data(
