@@ -9,3 +9,7 @@
 
 # Module federation build artifacts
 /.__mf__temp/
+
+# Local environment files (secrets), never committed
+.env*
+!.env*.example
